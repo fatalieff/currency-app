@@ -5,6 +5,7 @@ import { Button, Select, Modal, message } from "antd";
 import "./App.css";
 import "animate.css";
 
+
 function App() {
   //Hookslar
   const [rates, setRates] = useState({});
@@ -39,6 +40,11 @@ function App() {
     value: currency,
   }));
 
+  const swapCurrencies = ()=>{
+    setFromCurrency(toCurrency)
+    setToCurrency(fromCurrency)
+  }
+
   //Hesablama Hissesi
   useEffect(() => {
     if (rates[fromCurrency] && rates[toCurrency]) {
@@ -58,12 +64,13 @@ function App() {
       <div className="box animate__animated animate__fadeInUp ">
         <div className="buttons-group">
           <Select
-            defaultValue={fromCurrency}
+            value={fromCurrency}
             options={currencyOptions}
             onChange={(value) => setFromCurrency(value)}
           />
+          <Button onClick={swapCurrencies}><i class="fa-solid fa-right-left"></i></Button>
           <Select
-            defaultValue={toCurrency}
+            value={toCurrency}
             options={currencyOptions}
             onChange={(value) => setToCurrency(value)}
           />
