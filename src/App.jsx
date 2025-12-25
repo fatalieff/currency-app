@@ -64,20 +64,34 @@ function App() {
       <div className="box animate__animated animate__fadeInUp ">
         <div className="buttons-group">
           <Select
+            showSearch
+            size="large"
+            style={{ width: 120 }}
             value={fromCurrency}
             options={currencyOptions}
             onChange={(value) => setFromCurrency(value)}
+            filterOption={(input, option) =>
+              (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
+            }
           />
-          <Button onClick={swapCurrencies}><i class="fa-solid fa-right-left"></i></Button>
+          <Button type="primary" shape="circle" icon={<i className="fa-solid fa-right-left"></i>} size="large" onClick={swapCurrencies} />
           <Select
+            showSearch
+            size="large"
+            style={{ width: 120 }}
             value={toCurrency}
             options={currencyOptions}
             onChange={(value) => setToCurrency(value)}
+            filterOption={(input, option) =>
+              (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
+            }
           />
         </div>
         <input
-          placeholder="0"
+          className="amount-input"
+          placeholder="Enter amount"
           type="number"
+          value={amount}
           onChange={(e) => setAmount(e.target.value)}
         />
 
